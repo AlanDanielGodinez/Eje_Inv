@@ -1,11 +1,19 @@
+let nextProductId = 1;
+
 const products = [
-    { id: 1, name: 'Galletas', description: 'Descripción del producto 1', price: 20, cantidad: 50 },
-    { id: 2, name: 'Tornillos', description: 'Descripción del producto 2', price: 5, cantidad: 100 }
+    { id: nextProductId++, name: 'Galletas', description: 'Descripción del producto 1', price: 20, cantidad: 50 },
+    { id: nextProductId++, name: 'Tornillos', description: 'Descripción del producto 2', price: 5, cantidad: 100 }
 ];
 
 function getAllProducts() {
     return products;
 }
+function generarID() {
+    const timestamp = Date.now().toString(36); // Convertir la marca de tiempo a base 36
+    const aleatorio = Math.random().toString(36).substr(2, 5); // Generar un valor aleatorio y tomar solo los primeros 5 caracteres
+    return timestamp + aleatorio; // Combinar la marca de tiempo y el valor aleatorio
+}
+
 
 function getProductById(id) {
     return products.find(product => product.id === parseInt(id));
@@ -13,7 +21,7 @@ function getProductById(id) {
 
 function createProduct(name, description, price, cantidad) {
     const newProduct = {
-        id: products.length + 1,
+        id: nextProductId++,
         name,
         description,
         price: parseFloat(price),
